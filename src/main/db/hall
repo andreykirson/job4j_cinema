@@ -1,0 +1,5 @@
+CREATE TABLE [IF NOT EXISTS] hall (
+	seat_id serial PRIMARY KEY,
+	seat_number int UNIQUE NOT NULL,
+	seat_status boolean
+);
