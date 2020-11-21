@@ -3,7 +3,8 @@ package store;
 import model.Account;
 import model.Seat;
 import org.apache.commons.dbcp2.BasicDataSource;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ import java.util.Properties;
 public class PsqlStore implements Store {
 
     private final BasicDataSource pool = new BasicDataSource();
+    private static final Logger LOG = LoggerFactory.getLogger(PsqlStore.class.getName());
 
     private PsqlStore() {
         Properties cfg = new Properties();
@@ -58,7 +60,7 @@ public class PsqlStore implements Store {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    seats.add(new Seat(it.getInt("seat_id"), it.getInt("seat_number"), it.getBoolean("seat_status")));
+                    seats.add(new Seat(it.getInt("seat_id"), it.getInt("seat_row"), it.getInt("seat_number")));
                 }
             }
         } catch (Exception e) {
@@ -67,24 +69,24 @@ public class PsqlStore implements Store {
         return seats;
     }
 
-//    insert array of Seat into table according isolation rules
-
     @Override
-    public void buy(ArrayList<Seat> seats) throws SQLException {
-
+    public void buy(List<Seat> seats) throws SQLException {
         try (Connection cn = pool.getConnection();
-            PreparedStatement ps =  cn.prepareStatement("" +
-                    "BEGIN ISOLATION LEVEL SERIALIZABLE;" +
-                    "UPDATE hall" +
-                    "SET seat_status = true" +
-                    "WHERE seat_number = seat.getNumber;" +
-                    "COMMIT;")
+             PreparedStatement ps =  cn.prepareStatement("insert into hall(seat_row, seat_number) values (?, ?)")
          ) {
-
+            for (Seat seat:seats) {
+                ps.setInt(1, seat.getRow());
+                ps.setInt(2, seat.getNumber());
+                ps.execute();
+            }
+        } catch(SQLException se) {
+            LOG.debug("Error Code=: {}", se.getErrorCode());
+            LOG.debug("SQL State=: {}", se.getSQLState());
+            LOG.debug("Message =: {}", se.getMessage());
+            throw se;
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -120,7 +122,7 @@ public class PsqlStore implements Store {
     public Account findAccountById(int id) {
         Account account = null;
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM accounts WHERE id = ?;")
+             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM accounts WHERE user_id = ?;")
         ) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {

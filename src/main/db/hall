@@ -1,5 +1,6 @@
-CREATE TABLE [IF NOT EXISTS] hall (
+CREATE TABLE IF NOT EXISTS hall (
 	seat_id serial PRIMARY KEY,
-	seat_number int UNIQUE NOT NULL,
-	seat_status boolean
+	seat_row int NOT NULL,
+	seat_number int NOT NULL,
+	UNIQUE (seat_row, seat_number)
 );

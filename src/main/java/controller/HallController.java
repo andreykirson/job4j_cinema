@@ -11,7 +11,7 @@ import java.io.IOException;
  * @date 15/11/2020
  */
 
-public class HallServlet extends HttpServlet {
+public class HallController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("hall.jsp").forward(req, resp);

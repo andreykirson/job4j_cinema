@@ -5,17 +5,17 @@ import java.util.Objects;
 public class Seat {
     private int id;
     private int number;
-    private Boolean reserved = false;
+    private int row;
 
-    public Seat(int number, Boolean reserved) {
+    public Seat(int row, int number) {
         this.number = number;
-        this.reserved = reserved;
+        this.row = row;
     }
 
-    public Seat(int id, int number, Boolean reserved) {
+    public Seat(int id, int row, int number) {
         this.id = id;
+        this.row = row;
         this.number = number;
-        this.reserved = reserved;
     }
 
     public int getId() {
@@ -34,12 +34,12 @@ public class Seat {
         this.number = number;
     }
 
-    public Boolean getReserved() {
-        return reserved;
+    public int getRow() {
+        return row;
     }
 
-    public void setReserved(Boolean reserved) {
-        this.reserved = reserved;
+    public void setRow(int row) {
+        this.row = row;
     }
 
     @Override
@@ -48,12 +48,19 @@ public class Seat {
         if (o == null || getClass() != o.getClass()) return false;
         Seat seat = (Seat) o;
         return id == seat.id &&
-                Objects.equals(number, seat.number) &&
-                Objects.equals(reserved, seat.reserved);
+                Objects.equals(number, seat.number);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, number, reserved);
+        return Objects.hash(id, number);
+    }
+
+    @Override
+    public String toString() {
+        return "Seat{" +
+                ", row=" + row +
+                "number=" + number +
+                '}';
     }
 }

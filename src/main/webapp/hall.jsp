@@ -29,8 +29,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
 
-
-
     <title>Title</title>
 </head>
 <body>
@@ -41,41 +39,41 @@
 
         <div class="cinema-row row-1">
             <span class="row-number">Ряд 1</span>
-            <div class="seat"  id="seat11" data-value="11"><span class="seat-number">1</span></div>
-            <div class="seat" id="seat12" data-value="12"><span class="seat-number">2</span></div>
-            <div class="seat" id="seat13" data-value="13"><span class="seat-number">3</span></div>
-            <div class="seat" id="seat14" data-value="14"><span class="seat-number">4</span></div>
-            <div class="seat" id="seat15" data-value="15"><span class="seat-number">5</span></div>
-            <div class="seat" id="seat16" data-value="16"><span class="seat-number">6</span></div>
-            <div class="seat" id="seat17" data-value="17"><span class="seat-number">7</span></div>
+            <div class="seat" id="seat11" data-value="1,1"><span class="seat-number">1</span></div>
+            <div class="seat" id="seat12" data-value="1,2"><span class="seat-number">2</span></div>
+            <div class="seat" id="seat13" data-value="1,3"><span class="seat-number">3</span></div>
+            <div class="seat" id="seat14" data-value="1,4"><span class="seat-number">4</span></div>
+            <div class="seat" id="seat15" data-value="1,5"><span class="seat-number">5</span></div>
+            <div class="seat" id="seat16" data-value="1,6"><span class="seat-number">6</span></div>
+            <div class="seat" id="seat17" data-value="1,7"><span class="seat-number">7</span></div>
         </div>
 
         <div class="cinema-row row-2">
             <span class="row-number">Ряд 2</span>
-            <div class="seat" id="seat21" data-value="21"><span class="seat-number">1</span></div>
-            <div class="seat" id="seat22" data-value="22"><span class="seat-number">2</span></div>
-            <div class="seat" id="seat23" data-value="23"><span class="seat-number">3</span></div>
-            <div class="seat" id="seat24" data-value="24"><span class="seat-number">4</span></div>
-            <div class="seat" id="seat25" data-value="25"><span class="seat-number">5</span></div>
-            <div class="seat" id="seat26" data-value="26"><span class="seat-number">6</span></div>
-            <div class="seat" id="seat27" data-value="27"><span class="seat-number">7</span></div>
+            <div class="seat" id="seat21" data-value="2,1"><span class="seat-number">1</span></div>
+            <div class="seat" id="seat22" data-value="2,2"><span class="seat-number">2</span></div>
+            <div class="seat" id="seat23" data-value="2,3"><span class="seat-number">3</span></div>
+            <div class="seat" id="seat24" data-value="2,4"><span class="seat-number">4</span></div>
+            <div class="seat" id="seat25" data-value="2,5"><span class="seat-number">5</span></div>
+            <div class="seat" id="seat26" data-value="2,6"><span class="seat-number">6</span></div>
+            <div class="seat" id="seat27" data-value="2,7"><span class="seat-number">7</span></div>
         </div>
 
         <div class="cinema-row row-3">
             <span class="row-number">Ряд 3</span>
-            <div class="seat" id="seat31" data-value="31"><span class="seat-number">1</span></div>
-            <div class="seat" id="seat32" data-value="32"><span class="seat-number">2</span></div>
-            <div class="seat" id="seat33" data-value="33"><span class="seat-number">3</span></div>
-            <div class="seat" id="seat34" data-value="34"><span class="seat-number">4</span></div>
-            <div class="seat" id="seat35" data-value="35"><span class="seat-number">5</span></div>
-            <div class="seat" id="seat36" data-value="36"><span class="seat-number">6</span></div>
-            <div class="seat" id="seat37" data-value="37"><span class="seat-number">7</span></div>
+            <div class="seat" id="seat31" data-value="3,1"><span class="seat-number">1</span></div>
+            <div class="seat" id="seat32" data-value="3,2"><span class="seat-number">2</span></div>
+            <div class="seat" id="seat33" data-value="3,3"><span class="seat-number">3</span></div>
+            <div class="seat" id="seat34" data-value="3,4"><span class="seat-number">4</span></div>
+            <div class="seat" id="seat35" data-value="3,5"><span class="seat-number">5</span></div>
+            <div class="seat" id="seat36" data-value="3,6"><span class="seat-number">6</span></div>
+            <div class="seat" id="seat37" data-value="3,7"><span class="seat-number">7</span></div>
         </div>
     </div>
 
 </div>
 
-<button name="button" id="btn">Тык!</button>
+<button name="button" id="btn">Купить билеты</button>
 
 
 </body>
@@ -95,19 +93,17 @@
     $('#btn').click(function() {
         var elements = document.getElementsByClassName("active");
         let arr = [];
-
+        for (var i = 0; i < elements.length; i++) {
+            arr.push(elements[i].getAttribute("data-value"))
+        }
         $.ajax({
-            url: 'http://localhost:8080/job4j_cinema/hall.do',
+            url: 'http://localhost:8080/job4j_cinema/buySeat.do',
             type: "POST",
             dataType: "json",
-            success: function(){
-                for (var i = 0; i < elements.length; i++) {
-                    arr.push(elements[i].getAttribute("data-value"))
-                }
-                console.log(JSON.stringify(arr));
-            }
+            data: JSON.stringify(arr)
             })
         })
+
 </script>
 
 

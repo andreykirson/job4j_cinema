@@ -29,12 +29,12 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <servlet>
-    <servlet-name>HallServlet</servlet-name>
-    <servlet-class>controller.HallServlet</servlet-class>
+    <servlet-name>HallController</servlet-name>
+    <servlet-class>controller.HallController</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>HallServlet</servlet-name>
+    <servlet-name>HallController</servlet-name>
     <url-pattern>/hall.do</url-pattern>
   </servlet-mapping>
 
@@ -47,6 +47,18 @@
     <servlet-name>Hall</servlet-name>
     <url-pattern>/hall.jsp</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>BuySeatController</servlet-name>
+    <servlet-class>controller.BuySeatController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>BuySeatController</servlet-name>
+    <url-pattern>/buySeat.do</url-pattern>
+  </servlet-mapping>
+
+
 
 </web-app>
         
