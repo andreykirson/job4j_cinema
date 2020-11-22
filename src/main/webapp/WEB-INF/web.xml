@@ -28,6 +28,18 @@
 
   <display-name>Archetype Created Web Application</display-name>
 
+
+
+  <servlet>
+    <servlet-name>GetAllSoldSeatController</servlet-name>
+    <servlet-class>controller.GetAllSoldSeatController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>GetAllSoldSeatController</servlet-name>
+    <url-pattern>/getallsoldseat.do</url-pattern>
+  </servlet-mapping>
+
   <servlet>
     <servlet-name>HallController</servlet-name>
     <servlet-class>controller.HallController</servlet-class>
@@ -58,6 +70,22 @@
     <url-pattern>/buySeat.do</url-pattern>
   </servlet-mapping>
 
+
+  <servlet>
+    <servlet-name>ErrorController</servlet-name>
+    <servlet-class>controller.ErrorController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ErrorController</servlet-name>
+    <url-pattern>/error.do</url-pattern>
+  </servlet-mapping>
+
+
+  <error-page>
+    <exception-type>java.lang.UnsupportedOperationException</exception-type>
+    <location>/error.jsp</location>
+  </error-page>
 
 
 </web-app>

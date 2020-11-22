@@ -71,7 +71,9 @@ public class PsqlStore implements Store {
 
     @Override
     public void buy(List<Seat> seats) throws SQLException {
+
         try (Connection cn = pool.getConnection();
+
              PreparedStatement ps =  cn.prepareStatement("insert into hall(seat_row, seat_number) values (?, ?)")
          ) {
             for (Seat seat:seats) {

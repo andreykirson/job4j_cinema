@@ -44,6 +44,16 @@ body {
   border-radius: 7px;
 }
 
+.cinema-seats .seat.sold:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(84, 82, 82, 0.9);
+  border-radius: 7px;
+}
+
 .cinema-seats .cinema-row {
   position: relative;
   left: -75px;

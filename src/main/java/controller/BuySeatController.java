@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import model.Seat;
 import store.PsqlStore;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ public class BuySeatController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        req.getRequestDispatcher("error.jsp").forward(req, resp);
     }
 
     @Override
@@ -40,10 +39,11 @@ public class BuySeatController extends HttpServlet {
                String[] arr = jsonArray.get(i).getAsString().split(",");
                seats.add(new Seat(Integer.parseInt(arr[0]), Integer.parseInt(arr[1])));
             }
+            doGet(req, resp);
             PsqlStore.instOf().buy(seats);
-
         }  catch (IOException | SQLException e) {
-            e.printStackTrace();
+// --- Got to Error page ---
+            doGet(req, resp);
         }
 
     }

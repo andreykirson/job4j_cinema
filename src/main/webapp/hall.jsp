@@ -83,7 +83,7 @@
 <script>
 
     $('.cinema-seats .seat').on('click', function() {
-        $(this).toggleClass('active');
+        $(this).toggleClass('sold');
 
     });
 </script>
@@ -92,6 +92,10 @@
 
     $('#btn').click(function() {
         var elements = document.getElementsByClassName("active");
+        if (elements.length == 0) {
+            alert("Please select the seat");
+            return false;
+        }
         let arr = [];
         for (var i = 0; i < elements.length; i++) {
             arr.push(elements[i].getAttribute("data-value"))
@@ -100,13 +104,31 @@
             url: 'http://localhost:8080/job4j_cinema/buySeat.do',
             type: "POST",
             dataType: "json",
-            data: JSON.stringify(arr)
+            data: JSON.stringify(arr),
+            // success : window.location = "http://localhost:8080/job4j_cinema/error.jsp"
             })
         })
 
 </script>
 
-
-
-
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: 'http://localhost:8080/job4j_cinema/getallsoldseat.do',
+            type: "GET",
+            dataType: "json",
+            success: function(data){
+                var data = JSON.parse(JSON.stringify(data))
+                var elements = document.getElementsByClassName('seat');
+                $.each(data, function(index) {
+                    for (var i = 0; i < elements.length; i++) {
+                            if (document.getElementsByClassName('seat')[i].getAttribute("data-value") === (data[index].row.toString() + "," + data[index].number.toString())) {
+                                $(document.getElementsByClassName('seat')[i]).toggleClass('active');
+                       }
+                    }
+                });
+            }
+        });
+    })
+</script>
 </html>
