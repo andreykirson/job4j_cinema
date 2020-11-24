@@ -29,7 +29,7 @@ public class BuySeatController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        List<Seat> seats = new ArrayList<Seat>();
+        Collection<Seat> seats = (Collection<Seat>) req.getAttribute("seats");
         seats.add(new Seat(1,1,1));
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         String json = new Gson().toJson(seats);
@@ -55,8 +55,7 @@ public class BuySeatController extends HttpServlet {
                seats.add(new Seat(Integer.parseInt(arr[0]), Integer.parseInt(arr[1])));
             }
             req.setAttribute("seats", seats);
-            RequestDispatcher dispatch = req.getRequestDispatcher("http://localhost:8080/job4j_cinema/payment.jsp");
-            dispatch.forward(req, resp);
+            doGet(req, resp);
         }  catch (IOException e) {
             e.printStackTrace();
         }
