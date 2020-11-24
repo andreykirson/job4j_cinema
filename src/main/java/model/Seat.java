@@ -59,7 +59,7 @@ public class Seat {
     @Override
     public String toString() {
         return "Seat{" +
-                ", row=" + row +
+                "row=" + row + " " +
                 "number=" + number +
                 '}';
     }

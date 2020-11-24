@@ -1,26 +1,41 @@
 package controller;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import jdk.jfr.StackTrace;
 import model.Seat;
 import store.PsqlStore;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 public class BuySeatController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("error.jsp").forward(req, resp);
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        List<Seat> seats = new ArrayList<Seat>();
+        seats.add(new Seat(1,1,1));
+        PrintWriter writer = new PrintWriter(resp.getOutputStream());
+        String json = new Gson().toJson(seats);
+        writer.println(json);
+        writer.flush();
+        writer.close();
     }
 
     @Override
@@ -39,14 +54,13 @@ public class BuySeatController extends HttpServlet {
                String[] arr = jsonArray.get(i).getAsString().split(",");
                seats.add(new Seat(Integer.parseInt(arr[0]), Integer.parseInt(arr[1])));
             }
-            doGet(req, resp);
-            PsqlStore.instOf().buy(seats);
-        }  catch (IOException | SQLException e) {
-// --- Got to Error page ---
-            doGet(req, resp);
+            req.setAttribute("seats", seats);
+            RequestDispatcher dispatch = req.getRequestDispatcher("http://localhost:8080/job4j_cinema/payment.jsp");
+            dispatch.forward(req, resp);
+        }  catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
-
 
 }

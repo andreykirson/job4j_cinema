@@ -17,9 +17,9 @@ public class GetAllSoldSeatController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        Collection<Seat> cities = PsqlStore.instOf().getAllSeats();
+        Collection<Seat> seats = PsqlStore.instOf().getAllSeats();
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        String json = new Gson().toJson(cities);
+        String json = new Gson().toJson(seats);
         writer.println(json);
         writer.flush();
         writer.close();

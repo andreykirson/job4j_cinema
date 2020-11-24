@@ -50,6 +50,19 @@
     <url-pattern>/hall.do</url-pattern>
   </servlet-mapping>
 
+
+  <servlet>
+    <servlet-name>BuyController</servlet-name>
+    <servlet-class>controller.BuyController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>BuyController</servlet-name>
+    <url-pattern>/buy.do</url-pattern>
+  </servlet-mapping>
+
+
+
   <servlet>
     <servlet-name>Hall</servlet-name>
     <jsp-file>/hall.jsp</jsp-file>
@@ -59,6 +72,17 @@
     <servlet-name>Hall</servlet-name>
     <url-pattern>/hall.jsp</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Payment</servlet-name>
+    <jsp-file>/payment.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Payment</servlet-name>
+    <url-pattern>/payment.jsp</url-pattern>
+  </servlet-mapping>
+
 
   <servlet>
     <servlet-name>BuySeatController</servlet-name>

@@ -83,7 +83,7 @@
 <script>
 
     $('.cinema-seats .seat').on('click', function() {
-        $(this).toggleClass('sold');
+        $(this).toggleClass('active');
 
     });
 </script>
@@ -105,7 +105,7 @@
             type: "POST",
             dataType: "json",
             data: JSON.stringify(arr),
-            // success : window.location = "http://localhost:8080/job4j_cinema/error.jsp"
+            success : window.location = "http://localhost:8080/job4j_cinema/payment.jsp" + JSON.stringify(arr)
             })
         })
 
@@ -123,7 +123,7 @@
                 $.each(data, function(index) {
                     for (var i = 0; i < elements.length; i++) {
                             if (document.getElementsByClassName('seat')[i].getAttribute("data-value") === (data[index].row.toString() + "," + data[index].number.toString())) {
-                                $(document.getElementsByClassName('seat')[i]).toggleClass('active');
+                                $(document.getElementsByClassName('seat')[i]).toggleClass('sold');
                        }
                     }
                 });
