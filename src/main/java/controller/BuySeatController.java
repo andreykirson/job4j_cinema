@@ -17,10 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class BuySeatController extends HttpServlet {
@@ -29,8 +26,7 @@ public class BuySeatController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        Collection<Seat> seats = (Collection<Seat>) req.getAttribute("seats");
-        seats.add(new Seat(1,1,1));
+        Collection<Seat> seats = new ArrayList<>();
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         String json = new Gson().toJson(seats);
         writer.println(json);
@@ -54,12 +50,15 @@ public class BuySeatController extends HttpServlet {
                String[] arr = jsonArray.get(i).getAsString().split(",");
                seats.add(new Seat(Integer.parseInt(arr[0]), Integer.parseInt(arr[1])));
             }
-            req.setAttribute("seats", seats);
-            doGet(req, resp);
+            String jsonObject=new Gson().toJson(seats);
+            System.out.println(jsonObject);
+            resp.setContentType("application/json");
+            req.setAttribute("jsonObject", jsonObject);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("payment.jsp");
+            dispatcher.forward(req,resp);
         }  catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 }

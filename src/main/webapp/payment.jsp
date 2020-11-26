@@ -25,18 +25,20 @@
     <!-- form card cc payment -->
     <div class="card card-outline-secondary">
         <div class="card-body">
-            <h3 class="text-center">You choose the follow places: <span class="choosen seat"> createSeats() </span></h3>
+            <h3 class="text-center">You choose the follow places: </h3>
+            <span class="choosen seat" id = "seats"></span>
 
             <hr>
 
             <div class="row">
-                <label class="col-md-12">Total amount</label>
+                <label class="col-md-12">Total amount
+                </label>
             </div>
             <div class="form-inline">
                 <div class="input-group">
                     <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                    <input type="text" class="form-control text-right" id="exampleInputAmount" placeholder="39">
-                    <div class="input-group-append"><span class="input-group-text">.00</span></div>
+                    <input type="number" step="0.01" class="form-control text-right" id="exampleInputAmount" value="" disabled>
+                    <div class="input-group-append"></div>
                 </div>
             </div>
 
@@ -105,29 +107,30 @@
 </body>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function GetUrlValue(VarSearch) {
         $.ajax({
             async:false,
             url: 'http://localhost:8080/job4j_cinema/buySeat.do',
             type: "GET",
             dataType: "json",
-            success: function(data){
-                console.log(JSON.parse(JSON.stringify(data)))
+            success: function (data) {
+                var data = JSON.parse(JSON.stringify(data))
+                var element = document.getElementById("seats");
+                $.each(data, function(index) {
+                    var para = document.createElement("p");
+                    var node = document.createTextNode("Row " + data[index].row + " seat " + data[index].number);
+                    para.appendChild(node);
+                    element.appendChild(para);
+                });
+                document.getElementById('exampleInputAmount').value = data.length*500.10;
             }
-
-            //
-            // function(data){
-            //     var data = JSON.parse(JSON.stringify(data))
-            //     $.each(data, function(index) {
-            //         var rowSpan = document.createElement('span');
-            //         rowSpan.innerHTML =("row" + " " + data[index].row);
-            //         var seatSpan = document.createElement('span');
-            //         seatSpan.innerHTML = ("seat" + " " + data[index].number);
-            //     });
-            // }
         });
     })
+
+
+
 </script>
+
 
 
 </html>

@@ -105,7 +105,7 @@
             type: "POST",
             dataType: "json",
             data: JSON.stringify(arr),
-            success : window.location = "http://localhost:8080/job4j_cinema/payment.jsp" + JSON.stringify(arr)
+            success : window.location = "http://localhost:8080/job4j_cinema/payment.jsp"
             })
         })
 
