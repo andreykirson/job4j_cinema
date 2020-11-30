@@ -1,3 +1,8 @@
+<%@ page import="model.Seat" %>
+<%@ page import="java.util.List" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<jsp:useBean id="seat" scope="session" class="model.Seat"/>--%>
+
 <%--
   Created by IntelliJ IDEA.
   User: fruit
@@ -11,9 +16,34 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script>
+      var arr = [];
+
+      $(document).ready(function fn() {
+            $.ajax({
+                url: 'http://localhost:8080/job4j_cinema/selectSeat.do',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    var data = JSON.parse(JSON.stringify(data));
+                    var element = document.getElementById("seats");
+                    $.each(data, function (index) {
+                        var p = document.createElement("p");
+                        p.className = 'seats';
+                        var node = document.createTextNode("Row " + data[index].row + " seat " + data[index].number);
+                        var str = data[index].row + "," + data[index].number;
+                        arr.push(str);
+                        p.appendChild(node);
+                        element.appendChild(p);
+                    });
+                    document.getElementById('InputAmount').value = data.length * 500.10;
+                },
+            })
+        },
+)
+  </script>
     <title>Title</title>
-
-
 
 </head>
 <body>
@@ -37,14 +67,11 @@
             <div class="form-inline">
                 <div class="input-group">
                     <div class="input-group-prepend"><span class="input-group-text">$</span></div>
-                    <input type="number" step="0.01" class="form-control text-right" id="exampleInputAmount" value="" disabled>
+                    <input type="number" step="0.1" class="form-control text-right" id="InputAmount" value="" disabled>
                     <div class="input-group-append"></div>
                 </div>
             </div>
-
             <hr>
-
-
             <div class="alert alert-info p-2 pb-3">
                 <a class="close font-weight-normal initialism" data-dismiss="alert" href="#"><samp>×</samp></a>
                 CVC code is required.
@@ -96,41 +123,28 @@
                         <button type="reset" class="btn btn-default btn-lg btn-block">Cancel</button>
                     </div>
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-success btn-lg btn-block">Pay</button>
+                        <button type="button" class="btn btn-success btn-lg btn-block" id="btn">Pay</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+</div>
 
+<button name="button" type="button" id = "payBtn">Купить билеты</button>
 
 </body>
 
 <script>
-    $(document).ready(function GetUrlValue(VarSearch) {
+    $('#btn').click(function() {
         $.ajax({
-            async:false,
             url: 'http://localhost:8080/job4j_cinema/buySeat.do',
-            type: "GET",
+            type: "POST",
             dataType: "json",
-            success: function (data) {
-                var data = JSON.parse(JSON.stringify(data))
-                var element = document.getElementById("seats");
-                $.each(data, function(index) {
-                    var para = document.createElement("p");
-                    var node = document.createTextNode("Row " + data[index].row + " seat " + data[index].number);
-                    para.appendChild(node);
-                    element.appendChild(para);
-                });
-                document.getElementById('exampleInputAmount').value = data.length*500.10;
-            }
-        });
+            data: JSON.stringify(arr),
+            success : window.location = "http://localhost:8080/job4j_cinema/hall.jsp"
+        })
     })
-
-
-
 </script>
-
-
 
 </html>

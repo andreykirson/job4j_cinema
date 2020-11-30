@@ -52,16 +52,24 @@
 
 
   <servlet>
-    <servlet-name>BuyController</servlet-name>
-    <servlet-class>controller.BuyController</servlet-class>
+    <servlet-name>SelectSeatController</servlet-name>
+    <servlet-class>controller.SelectSeatController</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>BuyController</servlet-name>
-    <url-pattern>/buy.do</url-pattern>
+    <servlet-name>SelectSeatController</servlet-name>
+    <url-pattern>/selectSeat.do</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>BuySeatController</servlet-name>
+    <servlet-class>controller.BuySeatController</servlet-class>
+  </servlet>
 
+  <servlet-mapping>
+    <servlet-name>BuySeatController</servlet-name>
+    <url-pattern>/buySeat.do</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>Hall</servlet-name>
@@ -83,33 +91,23 @@
     <url-pattern>/payment.jsp</url-pattern>
   </servlet-mapping>
 
-
-  <servlet>
-    <servlet-name>BuySeatController</servlet-name>
-    <servlet-class>controller.BuySeatController</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>BuySeatController</servlet-name>
-    <url-pattern>/buySeat.do</url-pattern>
-  </servlet-mapping>
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/error.jsp</location>
+  </error-page>
 
 
   <servlet>
-    <servlet-name>ErrorController</servlet-name>
-    <servlet-class>controller.ErrorController</servlet-class>
+    <servlet-name>AppExceptionHandler</servlet-name>
+    <servlet-class>controller.AppExceptionHandler</servlet-class>
   </servlet>
 
+
   <servlet-mapping>
-    <servlet-name>ErrorController</servlet-name>
+    <servlet-name>AppExceptionHandler</servlet-name>
     <url-pattern>/error.do</url-pattern>
   </servlet-mapping>
 
-
-  <error-page>
-    <exception-type>java.lang.UnsupportedOperationException</exception-type>
-    <location>/error.jsp</location>
-  </error-page>
 
 
 </web-app>

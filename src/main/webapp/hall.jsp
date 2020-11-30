@@ -1,17 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: fruit
-  Date: 11/15/2020
-  Time: 9:19 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
     <meta charset="utf-8">
-
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -28,10 +20,19 @@
     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
+    <script type="text/javascript">
+        setTimeout(function load() {
+            window.open(self.location, '_self');
+            setTimeout(load, 12000);
+        }, 12000);
+    </script>
+
 
     <title>Title</title>
 </head>
-<body>
+
+
+<body  onload="load()">
 
 <div class="theatre">
 
@@ -73,7 +74,7 @@
 
 </div>
 
-<button name="button" id="btn">Купить билеты</button>
+<button name="button" id="btn">Перейти к оплате</button>
 
 
 </body>
@@ -101,7 +102,7 @@
             arr.push(elements[i].getAttribute("data-value"))
         }
         $.ajax({
-            url: 'http://localhost:8080/job4j_cinema/buySeat.do',
+            url: 'http://localhost:8080/job4j_cinema/selectSeat.do',
             type: "POST",
             dataType: "json",
             data: JSON.stringify(arr),
