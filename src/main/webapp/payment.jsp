@@ -2,8 +2,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
-
 <html>
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -135,7 +133,7 @@
             data: JSON.stringify(arr),
             statusCode: {
                 500: function() {
-                    alert(" Sorry your seat is sold, please return to hall and select new seats ");
+                    alert("Sorry your seats are sold, please return to hall and select new seats");
                     window.location = "http://localhost:8080/job4j_cinema/hall.do"
                 },
             }

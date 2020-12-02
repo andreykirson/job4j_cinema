@@ -21,3 +21,11 @@ This project represents the basic java web technology.
 
 ##### Registration:
 
+![cinema-hall](https://user-images.githubusercontent.com/32255911/100876220-cf533980-34f2-11eb-8b2e-8354dcd1339f.png)
+
+
+![payment page](https://user-images.githubusercontent.com/32255911/100876372-075a7c80-34f3-11eb-99d4-19f1ef3026c8.png)
+
+
+![payment seat is sold](https://user-images.githubusercontent.com/32255911/100876295-ebef7180-34f2-11eb-8d7f-1e9f9d3c5f80.png)
+
