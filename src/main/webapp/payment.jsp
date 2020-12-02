@@ -1,16 +1,9 @@
-<%@ page import="model.Seat" %>
-<%@ page import="java.util.List" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<jsp:useBean id="seat" scope="session" class="model.Seat"/>--%>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: fruit
-  Date: 11/23/2020
-  Time: 10:33 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
+
 <html>
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -131,8 +124,6 @@
     </div>
 </div>
 
-<button name="button" type="button" id = "payBtn">Купить билеты</button>
-
 </body>
 
 <script>
@@ -142,8 +133,14 @@
             type: "POST",
             dataType: "json",
             data: JSON.stringify(arr),
-            success : window.location = "http://localhost:8080/job4j_cinema/hall.jsp"
-        })
+            statusCode: {
+                500: function() {
+                    alert(" Sorry your seat is sold, please return to hall and select new seats ");
+                    window.location = "http://localhost:8080/job4j_cinema/hall.do"
+                },
+            }
+    })
+
     })
 </script>
 

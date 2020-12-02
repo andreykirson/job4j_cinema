@@ -5,8 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import model.Seat;
 import store.PsqlStore;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +14,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+
+/**
+ * @author Andrey
+ * @date 15/11/2020
+ */
+
 
 public class BuySeatController extends HttpServlet {
 
@@ -38,8 +43,7 @@ public class BuySeatController extends HttpServlet {
             PsqlStore.instOf().buy(seats);
            }  catch (IOException | SQLException e) {
             e.printStackTrace();
-            RequestDispatcher rd = req.getRequestDispatcher("/error.jsp");
-            rd.forward(req, resp);
+            resp.setStatus(500);
         }
     }
 }

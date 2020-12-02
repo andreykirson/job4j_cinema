@@ -16,6 +16,12 @@ import java.io.PrintWriter;
 import java.util.*;
 
 
+/**
+ * @author Andrey
+ * @date 15/11/2020
+ */
+
+
 public class SelectSeatController extends HttpServlet {
 
     @Override

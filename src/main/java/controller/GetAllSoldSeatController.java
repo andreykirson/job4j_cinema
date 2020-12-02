@@ -11,6 +11,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 
+/**
+ * @author Andrey
+ * @date 15/11/2020
+ */
+
+
 public class GetAllSoldSeatController extends HttpServlet {
 
     @Override
@@ -25,8 +31,4 @@ public class GetAllSoldSeatController extends HttpServlet {
         writer.close();
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
 }
