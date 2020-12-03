@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/andreykirson/job4j_cinema.svg?branch=master)](https://travis-ci.com/andreykirson/job4j_cinema)
+
 
 ## Java WEB project
 
